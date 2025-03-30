@@ -32,7 +32,7 @@
                     <a href="#faq" class="px-4 py-2 text-gray-700 hover:text-blue-600">FAQ</a>
                 </div>
                 <div class="md:absolute md:right-6 mt-4 md:mt-0">
-                    <a href="#" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-full text-base transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50 shadow-md hover:shadow-lg">
+                    <button data-modal-trigger class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-full text-base transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50 shadow-md hover:shadow-lg">
                         Try it!
                     </a>
                 </div>
@@ -50,7 +50,7 @@
                 with your virtual pet on<br class="hidden md:block">
                 your journey to self-care.
             </p>
-            <button id="getStartedBtn" class="bg-yellow-600 hover:bg-blue-700 text-white font-medium py-3 px-8 rounded-full text-lg transition duration-300 transform hover:scale-105">
+            <button data-modal-trigger class="bg-yellow-600 hover:bg-blue-700 text-white font-medium py-3 px-8 rounded-full text-lg transition duration-300 transform hover:scale-105">
                 Get Started
             </button>
         </div>
@@ -180,6 +180,58 @@
                             To make mental health tracking accessible, enjoyable, and effective for everyone, 
                             removing the stigma and adding moments of joy to daily self-reflection.
                         </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="faq" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 text-gray-800">Frequently Asked Questions</h2>
+            <div class="space-y-6">
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <button class="flex justify-between items-center w-full text-left">
+                        <h3 class="text-lg font-medium text-gray-800">Is my journal data private?</h3>
+                        <svg class="h-5 w-5 text-gray-500 transform transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="mt-4 text-gray-600">
+                        <p>Absolutely. All your data is stored in your local storage. We will never store your data in the cloud.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <button class="flex justify-between items-center w-full text-left">
+                        <h3 class="text-lg font-medium text-gray-800">How does the virtual pet work?</h3>
+                        <svg class="h-5 w-5 text-gray-500 transform transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="mt-4 text-gray-600">
+                        <p>Your cat companion grows with you on your mental health journey. Regular journal entries and mood tracking keep it happy and engaged, while long periods of inactivity might make it look sad. It’s a fun and interactive way to visualize your self-care habits.</p>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <button class="flex justify-between items-center w-full text-left">
+                        <h3 class="text-lg font-medium text-gray-800">Is there a mobile app?</h3>
+                        <svg class="h-5 w-5 text-gray-500 transform transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="mt-4 text-gray-600">
+                        <p>Not yet. BlepNote is only my capstone school project and currently I don't have any experience to create a mobile app. Maybe in the future.</p>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <button class="flex justify-between items-center w-full text-left">
+                        <h3 class="text-lg font-medium text-gray-800">Who created this website?</h3>
+                        <svg class="h-5 w-5 text-gray-500 transform transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="mt-4 text-gray-600">
+                        <p>Created by Romelio Teodoro, a 2nd year BSIT student. I wanted to make journaling more enjoyable and engaging, which led me to create BlepNote.</p>
                     </div>
                 </div>
             </div>
