@@ -7,19 +7,9 @@
     <title>BlepNote</title>
     <link rel="shortcut icon" href="assets/favicon/favicon.ico" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Poppins', 'sans-serif'],
-                    },
-                }
-            }
-        }
-    </script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="src/src/oneko.js" defer></script>
+    <script src="src/oneko.js" defer></script>
+    <script src="src/script.js" defer></script>
 </head>
 <body class="font-sans bg-gradient-to-br from-purple-50 to-blue-50 min-h-screen">
     <div class="relative min-h-[90vh]">
@@ -35,11 +25,11 @@
                     <img src="assets/images/logo.svg" alt="BlepNote Logo" class="h-10">
                 </a>
                 <div class="flex flex-wrap justify-center items-center space-x-0 space-y-2 md:space-y-0 md:space-x-8">
-                    <a href="#" class="px-4 py-2 text-gray-700 hover:text-blue-600">Home</a>
-                    <a href="#" class="px-4 py-2 text-gray-700 hover:text-blue-600">Features</a>
-                    <a href="#" class="px-4 py-2 text-gray-700 hover:text-blue-600">How it Works</a>
-                    <a href="#" class="px-4 py-2 text-gray-700 hover:text-blue-600">About</a>
-                    <a href="#" class="px-4 py-2 text-gray-700 hover:text-blue-600">FAQ</a>
+                    <a href="#home" class="px-4 py-2 text-gray-700 hover:text-blue-600">Home</a>
+                    <a href="#features" class="px-4 py-2 text-gray-700 hover:text-blue-600">Features</a>
+                    <a href="#how-it-works" class="px-4 py-2 text-gray-700 hover:text-blue-600">How it Works</a>
+                    <a href="#about" class="px-4 py-2 text-gray-700 hover:text-blue-600">About</a>
+                    <a href="#faq" class="px-4 py-2 text-gray-700 hover:text-blue-600">FAQ</a>
                 </div>
                 <div class="md:absolute md:right-6 mt-4 md:mt-0">
                     <a href="#" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-full text-base transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50 shadow-md hover:shadow-lg">
@@ -111,26 +101,26 @@
                         </video>
                     </div>
                     <div class="md:w-1/2">
-                        <h3 class="text-2xl font-bold mb-4">Heading Title 1</h3>
-                        <p class="text-gray-600 mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                        <h3 class="text-2xl font-bold mb-4">Getting Started</h3>
+                        <p class="text-gray-600 mb-4">Track your daily mood and journal your thoughts with BlepNote, your mental health companion.</p>
                         <ul class="space-y-2 text-gray-600">
                             <li class="flex items-start">
                                 <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                 </svg>
-                                <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span>
+                                <span>Sign up or log in to create your account.</span>
                             </li>
                             <li class="flex items-start">
                                 <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                 </svg>
-                                <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span>
+                                <span>Add journal entries and select your mood for the day.</span>
                             </li>
                             <li class="flex items-start">
                                 <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                 </svg>
-                                <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span>
+                                <span>Let your cat companion support you along the way.</span>
                             </li>
                         </ul>
                     </div>
@@ -142,26 +132,26 @@
                         </video>
                     </div>
                     <div class="md:w-1/2 order-2 md:order-1">
-                        <h3 class="text-2xl font-bold mb-4">Heading Title 2</h3>
-                        <p class="text-gray-600 mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                        <h3 class="text-2xl font-bold mb-4">Visualizing Your Journey</h3>
+                        <p class="text-gray-600 mb-4">See your progress at a glance with interactive mood tracking.</p>
                         <ul class="space-y-2 text-gray-600">
                             <li class="flex items-start">
                                 <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                 </svg>
-                                <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span>
+                                <span>A cat mood updates based on your latest mood.</span>
                             </li>
                             <li class="flex items-start">
                                 <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                 </svg>
-                                <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span>
+                                <span>A visual tracker maps your moods throughout the year.</span>
                             </li>
                             <li class="flex items-start">
                                 <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                 </svg>
-                                <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span>
+                                <span>Click any mood entry to revisit your journal.</span>
                             </li>
                         </ul>
                     </div>
@@ -169,16 +159,5 @@
             </div>
         </div>
     </section>
-    <script>
-        document.querySelectorAll('#faq button').forEach(button => {
-            button.addEventListener('click', () => {
-                const answer = button.nextElementSibling;
-                const icon = button.querySelector('svg');
-                
-                answer.classList.toggle('hidden');
-                icon.classList.toggle('rotate-180');
-            });
-        });
-    </script>
 </body>
 </html>
