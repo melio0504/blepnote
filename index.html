@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
-    <link rel="shortcut icon" href="assets/favicon/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="assets/favicon/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="src/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script>
@@ -55,11 +55,13 @@
     </nav>
     <div class="container mx-auto px-6 py-32 relative z-10">
         <div class="max-w-2xl ml-auto mr-0 md:mr-12 lg:mr-24 text-right">
-            <h2 class="text-3xl md:text-4xl font-bold mb-6 text-white">Feels like home.</h2>
-            <p class="text-lg md:text-xl mb-8 leading-relaxed text-white">
-                Track your mood, journal<br>
-                your thoughts, and bond<br>
-                with your virtual pet on<br>
+            <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-8 md:mb-10 text-white leading-tight">
+                Feels like home.
+            </h2>
+            <p class="text-xl md:text-2xl lg:text-3xl mb-10 md:mb-12 leading-relaxed md:leading-relaxed text-white/90">
+                Track your mood, journal<br class="hidden md:block">
+                your thoughts, and bond<br class="hidden md:block">
+                with your virtual pet on<br class="hidden md:block">
                 your journey to self-care.
             </p>
             <button id="getStartedBtn" class="bg-yellow-600 hover:bg-blue-700 text-white font-medium py-3 px-8 rounded-full text-lg transition duration-300 transform hover:scale-105">
@@ -68,5 +70,16 @@
         </div>
     </div>
     </div>
+    <script>
+        document.querySelectorAll('#faq button').forEach(button => {
+            button.addEventListener('click', () => {
+                const answer = button.nextElementSibling;
+                const icon = button.querySelector('svg');
+                
+                answer.classList.toggle('hidden');
+                icon.classList.toggle('rotate-180');
+            });
+        });
+    </script>
 </body>
 </html>
