@@ -8,21 +8,65 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="assets/favicon/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="src/style.css">
-    <!-- <script src="src/js/oneko.js" defer></script> -->
-    <script src="src/js/script.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="src/src/oneko.js" defer></script>
 </head>
-<body>
-    <header>
-        <nav>
-
-        </nav>
-    </header>
-    <main>
-
-    </main>
-    <footer>
-
-    </footer>
+<body class="font-sans bg-gradient-to-br from-purple-50 to-blue-50 min-h-screen">
+    <div class="relative min-h-[90vh]">
+        <div class="absolute inset-0 z-0">
+            <img src="assets/images/hero-bg.jpg" alt="Decorative background" 
+                    class="w-full h-full object-cover object-center">
+            <div class="absolute inset-0"></div>
+        </div>
+    <nav class="bg-white/50 backdrop-blur-sm sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0">
+                <a href="/" class="md:absolute md:left-6">
+                    <img src="assets/images/logo.svg" alt="BlepNote Logo" class="h-10">
+                </a>
+                <div class="flex flex-wrap justify-center items-center space-x-0 space-y-2 md:space-y-0 md:space-x-8">
+                    <a href="#" class="px-4 py-2 text-gray-700 hover:text-blue-600">Home</a>
+                    <a href="#" class="px-4 py-2 text-gray-700 hover:text-blue-600">Features</a>
+                    <a href="#" class="px-4 py-2 text-gray-700 hover:text-blue-600">How it Works</a>
+                    <a href="#" class="px-4 py-2 text-gray-700 hover:text-blue-600">About</a>
+                    <a href="#" class="px-4 py-2 text-gray-700 hover:text-blue-600">FAQ</a>
+                </div>
+                <div class="md:absolute md:right-6 mt-4 md:mt-0">
+                    <a href="#" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-full text-base transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50 shadow-md hover:shadow-lg">
+                        Try it!
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="container mx-auto px-6 py-32 relative z-10">
+        <div class="max-w-2xl ml-auto mr-0 md:mr-12 lg:mr-24 text-right">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 text-white">Feels like home.</h2>
+            <p class="text-lg md:text-xl mb-8 leading-relaxed text-white">
+                Track your mood, journal<br>
+                your thoughts, and bond<br>
+                with your virtual pet on<br>
+                your journey to self-care.
+            </p>
+            <button id="getStartedBtn" class="bg-yellow-600 hover:bg-blue-700 text-white font-medium py-3 px-8 rounded-full text-lg transition duration-300 transform hover:scale-105">
+                Get Started
+            </button>
+        </div>
+    </div>
+    </div>
 </body>
 </html>
