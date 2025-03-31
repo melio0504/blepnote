@@ -30,3 +30,10 @@ window.addEventListener("scroll", () => {
         scrollToTopBtn.classList.remove("opacity-100", "visible", "translate-y-0");
     }
 });
+
+scrollToTopBtn.addEventListener("click", () => {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+});
