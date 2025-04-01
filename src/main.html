@@ -443,5 +443,469 @@
             </div>
         </div>
     </div>
+    <script>
+        const dayHeaders = document.getElementById('dayHeaders');
+        for (let i = 1; i <= 31; i++) {
+            const headerCell = document.createElement('div');
+            headerCell.className = 'day-header-cell';
+            headerCell.textContent = i % 5 === 0 ? i : '';
+            dayHeaders.appendChild(headerCell);
+        }
+
+        const contributionGraph = document.getElementById('contributionGraph');
+        const months = [
+            'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 
+            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+        ];
+        
+        const journalDatabase = {
+            '2025': {},
+            '2026': {},
+            '2027': {},
+            '2028': {},
+            '2029': {}
+        };
+        
+        months.forEach(month => {
+            const monthRow = document.createElement('div');
+            monthRow.className = 'month-row';
+            
+            const monthLabel = document.createElement('div');
+            monthLabel.className = 'month-label';
+            monthLabel.textContent = month;
+            monthRow.appendChild(monthLabel);
+            
+            const daysContainer = document.createElement('div');
+            daysContainer.className = 'days-container';
+            
+            for (let i = 1; i <= 31; i++) {
+                const dayCell = document.createElement('div');
+                dayCell.className = 'day-cell';
+                dayCell.setAttribute('data-month', month);
+                dayCell.setAttribute('data-day', i);
+                
+                const dateKey = `${month}-${i}`;
+                dayCell.setAttribute('data-date', dateKey);
+                
+                daysContainer.appendChild(dayCell);
+            }
+            
+            monthRow.appendChild(daysContainer);
+            contributionGraph.appendChild(monthRow);
+        });
+
+        const moodStyles = {
+            'special': {
+                color: 'bg-purple-500',
+                text: 'text-purple-800',
+                bg: 'bg-purple-50',
+                label: 'Special',
+                border: 'border-purple-500'
+            },
+            'excellent': {
+                color: 'bg-green-500',
+                text: 'text-green-800',
+                bg: 'bg-green-50',
+                label: 'Excellent',
+                border: 'border-green-500'
+            },
+            'good': {
+                color: 'bg-blue-500',
+                text: 'text-blue-800',
+                bg: 'bg-blue-50',
+                label: 'Good',
+                border: 'border-blue-500'
+            },
+            'average': {
+                color: 'bg-yellow-500',
+                text: 'text-yellow-800',
+                bg: 'bg-yellow-50',
+                label: 'Average',
+                border: 'border-yellow-500'
+            },
+            'bad': {
+                color: 'bg-orange-500',
+                text: 'text-orange-800',
+                bg: 'bg-orange-50',
+                label: 'Bad',
+                border: 'border-orange-500'
+            },
+            'awful': {
+                color: 'bg-red-500',
+                text: 'text-red-800',
+                bg: 'bg-red-50',
+                label: 'Awful',
+                border: 'border-red-500'
+            }
+        };
+
+        const moodGifs = {
+            'special': ['special.gif', 'special-2.gif', 'special-3.gif'],
+            'excellent': ['excellent.gif'],
+            'good': ['good.gif', 'good-2.gif'],
+            'average': ['average.gif'],
+            'bad': ['bad.gif'],
+            'awful': ['awful.gif', 'awful-2.gif']
+        };
+
+        function getRandomMoodGif(mood) {
+            const gifs = moodGifs[mood];
+            if (!gifs || gifs.length === 0) return '';
+            const randomIndex = Math.floor(Math.random() * gifs.length);
+            return `../assets/cats/${gifs[randomIndex]}`;
+        }
+
+        const yearDropdownButton = document.getElementById('yearDropdownButton');
+        const yearDropdown = document.getElementById('yearDropdown');
+        const selectedYear = document.getElementById('selectedYear');
+        const yearOptions = document.querySelectorAll('.year-option');
+
+        yearDropdownButton.addEventListener('click', () => {
+            yearDropdown.classList.toggle('hidden');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!yearDropdownButton.contains(e.target) && !yearDropdown.contains(e.target)) {
+                yearDropdown.classList.add('hidden');
+            }
+        });
+
+        yearOptions.forEach(option => {option.addEventListener('click', () => {
+            const year = option.getAttribute('data-year');
+            selectedYear.textContent = year;
+            yearDropdown.classList.add('hidden');
+            
+            document.querySelectorAll('.day-cell').forEach(cell => {
+                cell.className = 'day-cell';
+            });
+            
+            const entries = journalDatabase[year] || {};
+            
+            Object.keys(entries).forEach(dateKey => {
+                const [month, day] = dateKey.split('-');
+                const cells = document.querySelectorAll(`.day-cell[data-date="${dateKey}"]`);
+                
+                cells.forEach(cell => {
+                    cell.className = 'day-cell';
+                    cell.classList.add(moodStyles[entries[dateKey].mood].color);
+                    
+                    cell.addEventListener('click', () => viewJournalEntry(dateKey));
+                });
+            });
+    
+            });
+        });
+
+        const journalModal = document.getElementById('journalModal');
+        const journalModalContent = document.getElementById('journalModalContent');
+        const journalModalTitle = document.getElementById('journalModalTitle');
+        const editDateDisplay = document.getElementById('editDateDisplay');
+        const viewEntryModal = document.getElementById('viewEntryModal');
+        const entryModalContent = document.getElementById('entryModalContent');
+        const addJournalBtn = document.getElementById('addJournalBtn');
+        const discardBtn = document.getElementById('discardBtn');
+        const saveBtn = document.getElementById('saveBtn');
+        const updateBtn = document.getElementById('updateBtn');
+        const closeEntryBtn = document.getElementById('closeEntryBtn');
+        const moodOptions = document.querySelectorAll('.mood-option');
+        const selectedMoodInput = document.getElementById('selectedMood');
+        const journalContent = document.getElementById('journalContent');
+        const entryDate = document.getElementById('entryDate');
+        const entryMood = document.getElementById('entryMood');
+        const entryContent = document.getElementById('entryContent');
+        const entryContentContainer = document.getElementById('entryContentContainer');
+        const editEntryBtn = document.getElementById('editEntryBtn');
+        const deleteEntryBtn = document.getElementById('deleteEntryBtn');
+        const emptyGifState = document.getElementById('emptyGifState');
+        const moodGif = document.getElementById('moodGif');
+
+        let currentEditingDateKey = null;
+
+        function viewJournalEntry(dateKey) {
+            const year = selectedYear.textContent;
+            const entry = journalDatabase[year][dateKey];
+            
+            if (!entry) {
+                emptyGifState.classList.remove('hidden');
+                moodGif.classList.add('hidden');
+                return;
+            }
+            
+            entryDate.textContent = entry.date;
+            entryContent.innerHTML = entry.content.replace(/\n/g, '<br>');
+            
+            const moodStyle = moodStyles[entry.mood];
+            entryMood.textContent = moodStyle.label;
+            entryMood.className = `inline-block px-3 py-1 rounded-full text-sm font-semibold ${moodStyle.text} ${moodStyle.bg}`;
+            
+            entryModalContent.className = `entry-modal-content ${moodStyle.bg} rounded-lg p-6`;
+            entryModalContent.style.borderLeft = `4px solid ${moodStyle.border.replace('border-', '')}`;
+            
+            const gifPath = getRandomMoodGif(entry.mood);
+            moodGif.src = gifPath;
+            moodGif.classList.remove('hidden');
+            emptyGifState.classList.add('hidden');
+            
+            
+            viewEntryModal.style.display = 'flex';
+        }
+
+        addJournalBtn.addEventListener('click', () => {
+            resetForm();
+            journalModalTitle.textContent = "New Journal Entry";
+            editDateDisplay.textContent = "";
+            saveBtn.classList.remove('hidden');
+            updateBtn.classList.add('hidden');
+            journalModal.style.display = 'flex';
+        });
+
+        discardBtn.addEventListener('click', () => {
+            journalModal.style.display = 'none';
+            resetForm();
+        });
+
+        closeEntryBtn.addEventListener('click', () => {
+            viewEntryModal.style.display = 'none';
+        });
+
+        moodOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                moodOptions.forEach(opt => opt.classList.remove('selected'));
+                
+                option.classList.add('selected');
+                
+                const mood = option.getAttribute('data-mood');
+                selectedMoodInput.value = mood;
+            });
+        });
+
+        saveBtn.addEventListener('click', () => {
+            const mood = selectedMoodInput.value;
+            const content = journalContent.value.trim();
+            
+            if (!mood) {
+                alert('Please select a mood for your day');
+                return;
+            }
+            
+            if (!content) {
+                alert('Please write something in your journal');
+                return;
+            }
+            
+            const today = new Date();
+            const currentMonth = months[today.getMonth()];
+            const currentDay = today.getDate();
+            const dateKey = `${currentMonth}-${currentDay}`;
+            const year = selectedYear.textContent;
+            
+            if (!journalDatabase[year]) journalDatabase[year] = {};
+            journalDatabase[year][dateKey] = {
+                mood: mood,
+                content: content,
+                date: `${currentMonth} ${currentDay}`,
+                fullDate: today,
+                year: year
+            };
+            
+            const cells = document.querySelectorAll('.day-cell');
+            cells.forEach(cell => {
+                const cellDate = cell.getAttribute('data-date');
+                
+                if (cellDate === dateKey) {
+                    cell.className = 'day-cell';
+                    
+                    cell.classList.add(moodStyles[mood].color);
+                    
+                    cell.addEventListener('click', () => viewJournalEntry(dateKey));
+                }
+            });
+            
+            const gifPath = getRandomMoodGif(mood);
+            moodGif.src = gifPath;
+            moodGif.classList.remove('hidden');
+            emptyGifState.classList.add('hidden');
+            
+            journalModal.style.display = 'none';
+            resetForm();
+        });
+
+        updateBtn.addEventListener('click', () => {
+            const mood = selectedMoodInput.value;
+            const content = journalContent.value.trim();
+            
+            if (!mood) {
+                alert('Please select a mood for your day');
+                return;
+            }
+            
+            if (!content) {
+                alert('Please write something in your journal');
+                return;
+            }
+            
+            if (!currentEditingDateKey) return;
+            
+            const year = selectedYear.textContent;
+            
+            journalDatabase[year][currentEditingDateKey] = {
+                ...journalDatabase[year][currentEditingDateKey],
+                mood: mood,
+                content: content
+            };
+            
+            const cells = document.querySelectorAll('.day-cell');
+            cells.forEach(cell => {
+                const cellDate = cell.getAttribute('data-date');
+                
+                if (cellDate === currentEditingDateKey) {
+                    cell.className = 'day-cell';
+                    
+                    cell.classList.add(moodStyles[mood].color);
+                }
+            });
+            
+            const gifPath = getRandomMoodGif(mood);
+            moodGif.src = gifPath;
+            moodGif.classList.remove('hidden');
+            emptyGifState.classList.add('hidden');
+            
+            journalModal.style.display = 'none';
+            viewEntryModal.style.display = 'none';
+            resetForm();
+            currentEditingDateKey = null;
+        });
+
+        editEntryBtn.addEventListener('click', () => {
+            const dateText = entryDate.textContent;
+            const [month, day] = dateText.split(' ');
+            currentEditingDateKey = `${month}-${day}`;
+            
+            const year = selectedYear.textContent;
+            const entry = journalDatabase[year][currentEditingDateKey];
+            if (!entry) return;
+            
+            journalModalTitle.textContent = "Edit Journal Entry";
+            editDateDisplay.textContent = entry.date;
+            
+            journalContent.value = entry.content.replace(/<br\s*\/?>/gi, '\n');
+            selectedMoodInput.value = entry.mood;
+            
+            moodOptions.forEach(option => {
+                option.classList.remove('selected');
+                if (option.getAttribute('data-mood') === entry.mood) {
+                    option.classList.add('selected');
+                }
+            });
+            
+            saveBtn.classList.add('hidden');
+            updateBtn.classList.remove('hidden');
+            
+            viewEntryModal.style.display = 'none';
+            journalModal.style.display = 'flex';
+        });
+
+        document.querySelectorAll('.day-cell').forEach(cell => {
+            const dateKey = cell.getAttribute('data-date');
+            cell.addEventListener('click', () => {
+                const year = selectedYear.textContent;
+                if (journalDatabase[year][dateKey]) {
+                    viewJournalEntry(dateKey);
+                }
+            });
+        });
+
+        function resetForm() {
+            moodOptions.forEach(opt => opt.classList.remove('selected'));
+            selectedMoodInput.value = '';
+            journalContent.value = '';
+            currentEditingDateKey = null;
+        }
+
+        journalModal.addEventListener('click', (e) => {
+            if (e.target === journalModal) {
+                journalModal.style.display = 'none';
+                resetForm();
+            }
+        });
+
+        viewEntryModal.addEventListener('click', (e) => {
+            if (e.target === viewEntryModal) {
+                viewEntryModal.style.display = 'none';
+            }
+        });
+
+        let entryToDelete = null;
+
+        deleteEntryBtn.addEventListener('click', () => {
+            const dateText = entryDate.textContent;
+            const [month, day] = dateText.split(' ');
+            entryToDelete = `${month}-${day}`;
+            
+            // Hide the view entry modal first
+            viewEntryModal.style.display = 'none';
+            
+            // Then show the delete confirmation modal
+            document.getElementById('deleteConfirmModal').classList.remove('hidden');
+        });
+
+        // Add these new event handlers
+        document.getElementById('closeDeleteConfirmModal').addEventListener('click', () => {
+            document.getElementById('deleteConfirmModal').classList.add('hidden');
+            // Reopen the view entry modal when closing via X button
+            viewEntryModal.style.display = 'flex';
+        });
+
+        document.getElementById('cancelDelete').addEventListener('click', () => {
+            document.getElementById('deleteConfirmModal').classList.add('hidden');
+        });
+
+        document.getElementById('confirmDelete').addEventListener('click', () => {
+            if (!entryToDelete) return;
+            
+            const year = selectedYear.textContent;
+            delete journalDatabase[year][entryToDelete];
+            
+            // Update the UI
+            const cells = document.querySelectorAll('.day-cell');
+            cells.forEach(cell => {
+                if (cell.getAttribute('data-date') === entryToDelete) {
+                    cell.className = 'day-cell';
+                }
+            });
+            
+            moodGif.classList.add('hidden');
+            emptyGifState.classList.remove('hidden');
+            
+            // Close the delete confirmation modal
+            document.getElementById('deleteConfirmModal').classList.add('hidden');
+            
+            // Don't reopen the view entry modal here since we're deleting
+            entryToDelete = null;
+        });
+
+        document.getElementById('cancelDelete').addEventListener('click', () => {
+            document.getElementById('deleteConfirmModal').classList.add('hidden');
+            // Reopen the view entry modal since we canceled
+            viewEntryModal.style.display = 'flex';
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            emptyGifState.classList.remove('hidden');
+            moodGif.classList.add('hidden');
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentUser = localStorage.getItem('currentUser');
+            if (!currentUser) {
+                window.location.href = '../index.html';
+                return;
+            }
+    
+        const user = JSON.parse(currentUser);
+        document.querySelector('.sidebar h2').textContent = user.name || 'User Name';
+    
+        });
+    </script>
 </body>
 </html>
