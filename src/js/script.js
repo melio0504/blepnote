@@ -358,7 +358,7 @@ loginForm.addEventListener('submit', (e) => {
     
     setTimeout(() => {
         hideModal();
-        window.location.href = 'src/main.html';
+        window.location.href = 'src/dashboard.html';
     }, 1000);
 });
 
@@ -377,7 +377,7 @@ document.getElementById('loginFormElement').addEventListener('submit', function(
     if (user) {
         // Store current user in localStorage
         localStorage.setItem('currentUser', JSON.stringify(user));
-        window.location.href = 'src/main.html';
+        window.location.href = 'src/dashboard.html';
     } else {
         showNotification('Error', 'Invalid email or password', 'error');
     }
