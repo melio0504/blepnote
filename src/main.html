@@ -396,7 +396,6 @@
             </div>
         </div>
     </div>
-    <!-- Delete Confirmation Modal -->
     <div id="deleteConfirmModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden">
         <div class="bg-white rounded-xl shadow-xl p-6 w-full max-w-md mx-4">
             <div class="flex justify-between items-center mb-4">
@@ -936,7 +935,7 @@
             const currentUser = JSON.parse(localStorage.getItem('currentUser'));
             const email = currentUser?.email;
 
-            localStorage.removeItem('currentUser');
+            // localStorage.removeItem('currentUser');
             
             setTimeout(() => {
                 window.location.href = '../index.html';    
