@@ -396,7 +396,6 @@
             </div>
         </div>
     </div>
-    <!-- Delete Confirmation Modal -->
     <div id="deleteConfirmModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden">
         <div class="bg-white rounded-xl shadow-xl p-6 w-full max-w-md mx-4">
             <div class="flex justify-between items-center mb-4">
@@ -905,6 +904,42 @@
         const user = JSON.parse(currentUser);
         document.querySelector('.sidebar h2').textContent = user.name || 'User Name';
     
+        });
+
+        document.getElementById('logoutBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('logoutModal').classList.remove('hidden');
+        });
+
+        document.getElementById('closeLogoutModal').addEventListener('click', function() {
+            document.getElementById('logoutModal').classList.add('hidden');
+        });
+
+        document.getElementById('cancelLogout').addEventListener('click', function() {
+            document.getElementById('logoutModal').classList.add('hidden');
+        });
+
+        function hideLogoutModal() {
+            document.getElementById('logoutModal').classList.add('hidden');
+        }
+
+        document.getElementById('closeLogoutModal').addEventListener('click', hideLogoutModal);
+        document.getElementById('cancelLogout').addEventListener('click', hideLogoutModal);
+        document.getElementById('logoutModal').addEventListener('click', function(e) {
+            if (e.target === this) hideLogoutModal();
+        });
+
+        document.getElementById('confirmLogout').addEventListener('click', function() {
+            document.getElementById('logoutSpinner').classList.remove('hidden');
+            
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            const email = currentUser?.email;
+
+            // localStorage.removeItem('currentUser');
+            
+            setTimeout(() => {
+                window.location.href = '../index.html';    
+            }, 1000)             
         });
     </script>
 </body>
