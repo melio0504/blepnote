@@ -8,6 +8,30 @@ tailwind.config = {
     }
 }
 
+const sections = document.querySelectorAll('section');
+const navLinks = document.querySelectorAll('nav a[href^="#"]');
+
+window.addEventListener('scroll', () => {
+    let current = '';
+    
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        const headerHeight = document.querySelector('nav').offsetHeight;
+        
+        if (pageYOffset >= (sectionTop - headerHeight - 50)) {
+            current = section.getAttribute('id');
+        }
+    });
+    
+    navLinks.forEach(link => {
+        link.classList.remove('text-blue-600', 'font-medium');
+        if (link.getAttribute('href') === `#${current}`) {
+            link.classList.add('text-blue-600', 'font-medium');
+        }
+    });
+});
+
 const scrollToTopBtn = document.getElementById("scrollToTopBtn");
 
 window.addEventListener("scroll", () => {
@@ -34,30 +58,6 @@ document.querySelectorAll('#faq button').forEach(button => {
         
         answer.classList.toggle('hidden');
         icon.classList.toggle('rotate-180');
-    });
-});
-
-const sections = document.querySelectorAll('section');
-const navLinks = document.querySelectorAll('nav a[href^="#"]');
-
-window.addEventListener('scroll', () => {
-    let current = '';
-    
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        const headerHeight = document.querySelector('nav').offsetHeight;
-        
-        if (pageYOffset >= (sectionTop - headerHeight - 50)) {
-            current = section.getAttribute('id');
-        }
-    });
-    
-    navLinks.forEach(link => {
-        link.classList.remove('text-blue-600', 'font-medium');
-        if (link.getAttribute('href') === `#${current}`) {
-            link.classList.add('text-blue-600', 'font-medium');
-        }
     });
 });
 
