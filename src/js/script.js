@@ -8,17 +8,6 @@ tailwind.config = {
     }
 }
 
-document.querySelectorAll('#faq button').forEach(button => {
-    button.addEventListener('click', () => {
-        const answer = button.nextElementSibling;
-        const icon = button.querySelector('svg');
-        
-        answer.classList.toggle('hidden');
-        icon.classList.toggle('rotate-180');
-    });
-});
-
-// Scroll-To-Top Button
 const scrollToTopBtn = document.getElementById("scrollToTopBtn");
 
 window.addEventListener("scroll", () => {
@@ -35,6 +24,16 @@ scrollToTopBtn.addEventListener("click", () => {
     window.scrollTo({
         top: 0,
         behavior: "smooth"
+    });
+});
+
+document.querySelectorAll('#faq button').forEach(button => {
+    button.addEventListener('click', () => {
+        const answer = button.nextElementSibling;
+        const icon = button.querySelector('svg');
+        
+        answer.classList.toggle('hidden');
+        icon.classList.toggle('rotate-180');
     });
 });
 
@@ -375,7 +374,6 @@ document.getElementById('loginFormElement').addEventListener('submit', function(
     const user = users.find(u => u.email === email && u.password === password);
     
     if (user) {
-        // Store current user in localStorage
         localStorage.setItem('currentUser', JSON.stringify(user));
         window.location.href = 'src/dashboard.html';
     } else {
