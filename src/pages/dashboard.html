@@ -567,7 +567,7 @@
             const gifs = moodGifs[mood];
             if (!gifs || gifs.length === 0) return '';
             const randomIndex = Math.floor(Math.random() * gifs.length);
-            return `../assets/cats/${gifs[randomIndex]}`;
+            return `../../assets/cats/${gifs[randomIndex]}`;
         }
 
         const yearDropdownButton = document.getElementById('yearDropdownButton');
