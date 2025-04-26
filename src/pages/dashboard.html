@@ -501,6 +501,8 @@
                 
                 const dateKey = `${month}-${i}`;
                 dayCell.setAttribute('data-date', dateKey);
+
+                dayCell.title = `${month} ${i}`;
                 
                 daysContainer.appendChild(dayCell);
             }
