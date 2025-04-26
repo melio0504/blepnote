@@ -992,6 +992,17 @@
         initializeContributionGraph();
     
         document.addEventListener('DOMContentLoaded', () => {
+            const currentPage = window.location.pathname.split('/').pop();
+            const navLinks = document.querySelectorAll('.sidebar a');
+            
+            navLinks.forEach(link => {
+                const linkPage = link.getAttribute('href');
+                if (currentPage === linkPage) {
+                    link.classList.add('bg-blue-100', 'text-blue-700');
+                    link.classList.remove('text-gray-700');
+                }
+            });
+
             emptyGifState.classList.remove('hidden');
             moodGif.classList.add('hidden');
             
