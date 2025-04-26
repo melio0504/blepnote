@@ -135,6 +135,10 @@
             transform: scale(0.9);
             opacity: 0;
             transition: all 0.3s ease;
+            /* Hide scrollbar */
+            &::-webkit-scrollbar {
+                display: none;
+            }
         }
 
         .modal.active .modal-content {
@@ -199,11 +203,13 @@
             display: inline-flex;
             flex-direction: column;
             align-items: center;
-            margin-right: 1rem;
             cursor: pointer;
-            padding: 0.5rem;
+            padding: 0.5rem 1rem; 
             border-radius: 0.5rem;
             transition: all 0.2s ease;
+            width: 80px;
+            box-sizing: border-box;
+            text-align: center;
         }
 
         .mood-option:hover {
@@ -219,6 +225,13 @@
             height: 2rem;
             border-radius: 50%;
             margin-bottom: 0.5rem;
+        }
+
+        #moodOptionsContainer {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1px;
+            justify-content: space-between;
         }
 
         .mood-bg-special { 
