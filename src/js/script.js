@@ -25,10 +25,18 @@ window.addEventListener('scroll', () => {
     });
     
     navLinks.forEach(link => {
-        link.classList.remove('text-blue-600', 'font-medium');
-        if (link.getAttribute('href') === `#${current}`) {
-            link.classList.add('text-blue-600', 'font-medium');
-        }
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            const headerHeight = document.querySelector('nav').offsetHeight;
+            const targetPosition = targetElement.offsetTop - headerHeight;
+            
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
+        });
     });
 });
 
