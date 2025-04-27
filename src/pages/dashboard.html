@@ -536,7 +536,7 @@
     
         const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
         
-        const journalDatabase = {
+        const journalDatabase = JSON.parse(localStorage.getItem('journalDatabase')) || {
             '2025': {},
             '2026': {},
             '2027': {},
@@ -735,6 +735,8 @@
                 fullDate: today,
                 year: year
             };
+
+            localStorage.setItem('journalDatabase', JSON.stringify(journalDatabase));
             
             document.querySelectorAll('.day-cell').forEach(cell => {
                 const cellDate = cell.getAttribute('data-date');
@@ -777,6 +779,8 @@
                 mood: mood,
                 content: content
             };
+
+            localStorage.setItem('journalDatabase', JSON.stringify(journalDatabase));
             
             document.querySelectorAll('.day-cell').forEach(cell => {
                 const cellDate = cell.getAttribute('data-date');
@@ -802,6 +806,8 @@
             
             const year = selectedYear.textContent;
             delete journalDatabase[year][entryToDelete];
+
+            localStorage.setItem('journalDatabase', JSON.stringify(journalDatabase));
             
             document.querySelectorAll('.day-cell').forEach(cell => {
                 if (cell.getAttribute('data-date') === entryToDelete) {
@@ -994,29 +1000,52 @@
         initializeContributionGraph();
     
         document.addEventListener('DOMContentLoaded', () => {
-            const currentPage = window.location.pathname.split('/').pop();
-            const navLinks = document.querySelectorAll('.sidebar a');
-            
-            navLinks.forEach(link => {
-                const linkPage = link.getAttribute('href');
-                if (currentPage === linkPage) {
-                    link.classList.add('bg-blue-100', 'text-blue-700');
-                    link.classList.remove('text-gray-700');
-                }
-            });
+        // Load user data
+        const currentUser = localStorage.getItem('currentUser');
+        if (!currentUser) {
+            window.location.href = '../../index.html';
+            return;
+        }
 
+        // Load journal entries from localStorage
+        const savedJournalData = JSON.parse(localStorage.getItem('journalDatabase'));
+        if (savedJournalData) {
+            Object.keys(savedJournalData).forEach(year => {
+                journalDatabase[year] = savedJournalData[year];
+            });
+        }
+
+        // Render existing entries
+        const year = selectedYear.textContent;
+        const entries = journalDatabase[year] || {};
+        Object.keys(entries).forEach(dateKey => {
+            const [month, day] = dateKey.split('-');
+            const cells = document.querySelectorAll(`.day-cell[data-date="${dateKey}"]`);
+            
+            cells.forEach(cell => {
+                cell.className = 'day-cell';
+                cell.classList.add(moodStyles[entries[dateKey].mood].color);
+                cell.addEventListener('click', () => viewJournalEntry(dateKey));
+            });
+        });
+
+        // Show GIF if there's an entry for today
+        const today = new Date();
+        const currentMonth = months[today.getMonth()];
+        const currentDay = today.getDate();
+        const todayKey = `${currentMonth}-${currentDay}`;
+        
+        if (journalDatabase[year]?.[todayKey]) {
+            const mood = journalDatabase[year][todayKey].mood;
+            const gifPath = getRandomMoodGif(mood);
+            moodGif.src = gifPath;
+            moodGif.classList.remove('hidden');
+            emptyGifState.classList.add('hidden');
+        } else {
             emptyGifState.classList.remove('hidden');
             moodGif.classList.add('hidden');
-            
-            const currentUser = localStorage.getItem('currentUser');
-            if (!currentUser) {
-                window.location.href = '../../index.html';
-                return;
-            }
-            
-            const user = JSON.parse(currentUser);
-            document.querySelector('.sidebar h2').textContent = user.name || 'User Name';
-        });
+        }
+    });
     </script>
 </body>
 </html>
