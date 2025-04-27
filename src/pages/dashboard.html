@@ -7,18 +7,8 @@
     <link rel="shortcut icon" href="../../assets/favicon/favicon.ico" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="src/js/tailwind.config.js"></script>
     <script src="../js/oneko.js" defer></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Poppins', 'sans-serif'],
-                    },
-                }
-            }
-        }
-    </script>
     <style>
         body {
             overflow: hidden;
@@ -292,28 +282,28 @@
 <body class="bg-gray-100 font-sans overflow-x-hidden">
     <div class="flex">
         <div class="sidebar w-64 bg-white h-screen shadow-md fixed">
-        <div class="p-6 flex flex-col items-center h-full">
-            <div class="flex flex-col items-center w-full">
-                <img src="../../assets/images/logo.svg" alt="BlepNote Logo" class="h-12 mb-6">
-                <div class="flex flex-col items-center mb-8">
-                    <div class="w-24 h-24 rounded-full bg-gray-300 mb-4 flex items-center justify-center">
-                        <span class="text-gray-500">Profile</span>
+            <div class="p-6 flex flex-col items-center h-full">
+                <div class="flex flex-col items-center w-full">
+                    <img src="../../assets/images/logo.svg" alt="BlepNote Logo" class="h-12 mb-6">
+                    <div class="flex flex-col items-center mb-8">
+                        <div class="w-24 h-24 rounded-full bg-gray-300 mb-4 flex items-center justify-center">
+                            <span class="text-gray-500">Profile</span>
+                        </div>
+                        <h2 class="text-xl font-bold">&nbsp;</h2>
+                        <p class="text-gray-600 text-sm text-center mt-2">Journal enthusiast and cat lover</p>
                     </div>
-                    <h2 class="text-xl font-bold">&nbsp;</h2>
-                    <p class="text-gray-600 text-sm text-center mt-2">Journal enthusiast and cat lover</p>
+                    <div class="w-full space-y-2 text-center">
+                        <a href="profile.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded">Profile</a>
+                        <a href="dashboard.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded">Dashboard</a>
+                        <a href="statistics.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded">Statistics</a>
+                        <a href="settings.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded">Settings</a>
+                        <a href id="logoutBtn" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded">Log Out</a>
+                    </div>
                 </div>
-                <div class="w-full space-y-2 text-center">
-                    <a href="profile.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded">Profile</a>
-                    <a href="dashboard.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded">Dashboard</a>
-                    <a href="statistics.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded">Statistics</a>
-                    <a href="settings.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded">Settings</a>
-                    <a href id="logoutBtn" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded">Log Out</a>
+                <div class="mt-auto p-4 text-center text-gray-400 text-xs">
+                    BlepNote v0.1 Alpha For Educational Demonstration Purposes Only
                 </div>
             </div>
-            <div class="mt-auto p-4 text-center text-gray-400 text-xs">
-                BlepNote v0.1 Alpha For Educational Demonstration Purposes Only
-            </div>
-        </div>
         </div>
         <div class="flex-1 ml-64">
             <div class="container mx-auto px-4 py-8 flex justify-center items-center">
