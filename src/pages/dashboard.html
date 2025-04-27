@@ -292,7 +292,8 @@
 <body class="bg-gray-100 font-sans overflow-x-hidden">
     <div class="flex">
         <div class="sidebar w-64 bg-white h-screen shadow-md fixed">
-            <div class="p-6 flex flex-col items-center">
+        <div class="p-6 flex flex-col items-center h-full">
+            <div class="flex flex-col items-center w-full">
                 <img src="../../assets/images/logo.svg" alt="BlepNote Logo" class="h-12 mb-6">
                 <div class="flex flex-col items-center mb-8">
                     <div class="w-24 h-24 rounded-full bg-gray-300 mb-4 flex items-center justify-center">
@@ -309,6 +310,10 @@
                     <a href id="logoutBtn" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded">Log Out</a>
                 </div>
             </div>
+            <div class="mt-auto p-4 text-center text-gray-400 text-xs">
+                BlepNote v0.1 Alpha For Educational Demonstration Purposes Only
+            </div>
+        </div>
         </div>
         <div class="flex-1 ml-64">
             <div class="container mx-auto px-4 py-8 flex justify-center items-center">
@@ -349,7 +354,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="w-full lg:w-50 flex flex-col gap-20">
+                    <div class="w-full lg:w-50 flex flex-col gap-5">
                         <button id="addJournalBtn" class="w-full bg-blue-600 hover:bg-blue-900 text-white font-medium py-4 px-5 rounded-lg text-lg transition duration-300 transform hover:scale-[1.02] shadow-md">
                             + <br>ADD JOURNAL
                         </button>
@@ -701,6 +706,7 @@
             
             const gifPath = getRandomMoodGif(entry.mood);
             moodGif.src = gifPath;
+            moodGif.style.display = 'block';
             moodGif.classList.remove('hidden');
             emptyGifState.classList.add('hidden');
             
@@ -749,6 +755,7 @@
             
             const gifPath = getRandomMoodGif(mood);
             moodGif.src = gifPath;
+            moodGif.style.display = 'block';
             moodGif.classList.remove('hidden');
             emptyGifState.classList.add('hidden');
             
@@ -815,11 +822,16 @@
                 }
             });
             
-            moodGif.classList.add('hidden');
-            emptyGifState.classList.remove('hidden');
+            resetGifContainer();
             
             hideModal(document.getElementById('deleteConfirmModal'));
             entryToDelete = null;
+        }
+
+        function resetGifContainer() {
+            emptyGifState.classList.remove('hidden');
+            moodGif.classList.add('hidden');
+            moodGif.style.display = 'none';
         }
 
         yearDropdownButton.addEventListener('click', () => {
@@ -1000,52 +1012,65 @@
         initializeContributionGraph();
     
         document.addEventListener('DOMContentLoaded', () => {
-        // Load user data
-        const currentUser = localStorage.getItem('currentUser');
-        if (!currentUser) {
-            window.location.href = '../../index.html';
-            return;
-        }
+            const currentPage = window.location.pathname.split('/').pop();
+            const navLinks = document.querySelectorAll('.sidebar a');
 
-        // Load journal entries from localStorage
-        const savedJournalData = JSON.parse(localStorage.getItem('journalDatabase'));
-        if (savedJournalData) {
-            Object.keys(savedJournalData).forEach(year => {
-                journalDatabase[year] = savedJournalData[year];
+            navLinks.forEach(link => {
+                const linkPage = link.getAttribute('href');
+                if (currentPage === linkPage) {
+                    link.classList.add('bg-blue-100', 'text-blue-700');
+                    link.classList.remove('text-gray-700');
+                }
             });
-        }
 
-        // Render existing entries
-        const year = selectedYear.textContent;
-        const entries = journalDatabase[year] || {};
-        Object.keys(entries).forEach(dateKey => {
-            const [month, day] = dateKey.split('-');
-            const cells = document.querySelectorAll(`.day-cell[data-date="${dateKey}"]`);
-            
-            cells.forEach(cell => {
-                cell.className = 'day-cell';
-                cell.classList.add(moodStyles[entries[dateKey].mood].color);
-                cell.addEventListener('click', () => viewJournalEntry(dateKey));
-            });
-        });
-
-        // Show GIF if there's an entry for today
-        const today = new Date();
-        const currentMonth = months[today.getMonth()];
-        const currentDay = today.getDate();
-        const todayKey = `${currentMonth}-${currentDay}`;
-        
-        if (journalDatabase[year]?.[todayKey]) {
-            const mood = journalDatabase[year][todayKey].mood;
-            const gifPath = getRandomMoodGif(mood);
-            moodGif.src = gifPath;
-            moodGif.classList.remove('hidden');
-            emptyGifState.classList.add('hidden');
-        } else {
             emptyGifState.classList.remove('hidden');
             moodGif.classList.add('hidden');
-        }
-    });
+
+            const currentUser = localStorage.getItem('currentUser');
+            if (!currentUser) {
+                window.location.href = '../../index.html';
+                return;
+            }
+
+            const user = JSON.parse(currentUser);
+            document.querySelector('.sidebar h2').textContent = user.name || 'User Name';
+            
+            const savedJournalData = JSON.parse(localStorage.getItem('journalDatabase'));
+            if (savedJournalData) {
+                Object.keys(savedJournalData).forEach(year => {
+                    journalDatabase[year] = savedJournalData[year];
+                });
+            }
+
+            const year = selectedYear.textContent;
+            const entries = journalDatabase[year] || {};
+            Object.keys(entries).forEach(dateKey => {
+                const [month, day] = dateKey.split('-');
+                const cells = document.querySelectorAll(`.day-cell[data-date="${dateKey}"]`);
+                
+                cells.forEach(cell => {
+                    cell.className = 'day-cell';
+                    cell.classList.add(moodStyles[entries[dateKey].mood].color);
+                    cell.addEventListener('click', () => viewJournalEntry(dateKey));
+                });
+            });
+
+            const today = new Date();
+            const currentMonth = months[today.getMonth()];
+            const currentDay = today.getDate();
+            const todayKey = `${currentMonth}-${currentDay}`;
+            
+            if (journalDatabase[year]?.[todayKey]) {
+                const mood = journalDatabase[year][todayKey].mood;
+                const gifPath = getRandomMoodGif(mood);
+                moodGif.src = gifPath;
+                moodGif.classList.remove('hidden');
+                emptyGifState.classList.add('hidden');
+            } else {
+                emptyGifState.classList.remove('hidden');
+                moodGif.classList.add('hidden');
+            }
+        });
     </script>
 </body>
 </html>
