@@ -1,13 +1,3 @@
-tailwind.config = {
-    theme: {
-        extend: {
-            fontFamily: {
-                sans: ['Poppins', 'sans-serif'],
-            },
-        }
-    }
-}
-
 const sections = document.querySelectorAll('section');
 const navLinks = document.querySelectorAll('nav a[href^="#"]');
 
