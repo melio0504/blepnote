@@ -7,7 +7,6 @@
     <link rel="shortcut icon" href="../../assets/favicon/favicon.ico" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="../js/auth.js" defer></script>
     <script src="../js/oneko.js" defer></script>
     <script>
         tailwind.config = {
@@ -983,6 +982,9 @@
     
         document.getElementById('confirmLogout').addEventListener('click', function() {
             document.getElementById('logoutSpinner').classList.remove('hidden');
+            
+            localStorage.removeItem('currentUser');
+            
             setTimeout(() => {
                 window.location.href = '../../index.html';    
             }, 1000);
