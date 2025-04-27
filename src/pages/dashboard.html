@@ -18,6 +18,27 @@
             }
         }
 
+        .profile-picture-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto;
+        }
+
+        .profile-picture {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .profile-picture:hover {
+            opacity: 0.8;
+        }
+
+        .profile-picture, 
         .profile-picture-sidebar {
             width: 150px;
             height: 150px;
@@ -286,10 +307,10 @@
                 <div class="flex flex-col items-center w-full">
                     <img src="../../assets/images/logo.svg" alt="BlepNote Logo" class="h-12 mb-6">
                     <div class="flex flex-col items-center mb-8">
-                        <div class="w-24 h-24 rounded-full bg-gray-300 mb-4 flex items-center justify-center">
-                            <span class="text-gray-500">Profile</span>
+                        <div class="profile-picture-sidebar mb-4">
+                            <img id="profilePicture" src="../../assets/images/default-profile.jpg" alt="Profile">
                         </div>
-                        <h2 class="text-xl font-bold">&nbsp;</h2>
+                        <h2 class="text-xl font-bold" id="profileName">&nbsp;</h2>
                         <p class="text-gray-600 text-sm text-center mt-2">Journal enthusiast and cat lover</p>
                     </div>
                     <div class="w-full space-y-2 text-center">
@@ -1016,15 +1037,38 @@
             emptyGifState.classList.remove('hidden');
             moodGif.classList.add('hidden');
 
-            const currentUser = localStorage.getItem('currentUser');
-            if (!currentUser) {
+            const currentUserString = localStorage.getItem('currentUser');
+            if (!currentUserString) {
                 window.location.href = '../../index.html';
                 return;
             }
 
-            const user = JSON.parse(currentUser);
-            document.querySelector('.sidebar h2').textContent = user.name || 'User Name';
-            
+            const currentUser = JSON.parse(currentUserString) || {};
+
+            document.getElementById('profileName').textContent = currentUser.name || 'User Name';
+            document.querySelector('.sidebar h2').textContent = currentUser.name || 'User Name';
+
+            if (currentUser.profilePicture) {
+                document.getElementById('profilePicture').src = currentUser.profilePicture;
+            }
+
+            window.addEventListener('storage', function(event) {
+                if (event.key === 'currentUser') {
+                    try {
+                        const updatedUser = JSON.parse(event.newValue);
+                        if (updatedUser && updatedUser.profilePicture) {
+                            document.getElementById('profilePicture').src = updatedUser.profilePicture;
+                            if (updatedUser.name) {
+                                document.getElementById('profileName').textContent = updatedUser.name;
+                                document.querySelector('.sidebar h2').textContent = updatedUser.name;
+                            }
+                        }
+                    } catch (e) {
+                        console.error('Error parsing updated user data:', e);
+                    }
+                }
+            });
+
             const savedJournalData = JSON.parse(localStorage.getItem('journalDatabase'));
             if (savedJournalData) {
                 Object.keys(savedJournalData).forEach(year => {
