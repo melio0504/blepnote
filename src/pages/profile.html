@@ -6,163 +6,20 @@
     <title>Profile | BlepNote</title>
     <link rel="shortcut icon" href="../../assets/favicon/favicon.ico" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/profile-page.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="src/js/tailwind.config.js"></script>
     <script src="../js/oneko.js" defer></script>
-    <style>
-        body {
-            overflow-x: hidden;
-        }
-
-        .sidebar {
-            transition: all 0.3s ease;
-        }
-
-        .profile-picture-container {
-            position: relative;
-            width: 150px;
-            height: 150px;
-            margin: 0 auto;
-        }
-
-        .profile-picture {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .profile-picture:hover {
-            opacity: 0.8;
-        }
-
-        .profile-picture, 
-        .profile-picture-sidebar {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            overflow: hidden;
-            margin: 0 auto;
-        }
-
-        .profile-picture img,
-        .profile-picture-sidebar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .profile-picture-edit {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            background-color: rgba(0,0,0,0.7);
-            color: white;
-            border-radius: 50%;
-            width: 36px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            opacity: 0;
-            transition: all 0.3s ease;
-        }
-
-        .profile-picture-container:hover .profile-picture-edit {
-            opacity: 1;
-        }
-
-        #fileInput {
-            display: none;
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.5);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 0.5rem;
-            width: 90%;
-            max-width: 500px;
-        }
-
-        .delete-account-btn {
-            transition: all 0.3s ease;
-        }
-
-        .delete-account-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .password-toggle {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-        }
-
-        #logoutModal {
-            transition: opacity 0.3s ease;
-        }
-
-        #deleteAccountModal {
-            transition: opacity 0.3s ease;
-        }
-
-        #deleteAccountModal .bg-white {
-            transform: translateY(0);
-            transition: transform 0.3s ease;
-        }
-
-        #deleteAccountModal.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        #deleteAccountModal.hidden .bg-white {
-            transform: translateY(-20px);
-        }
-        
-        .sidebar-link.active {
-            background-color: #EFF6FF;
-            color: #3B82F6;
-            font-weight: 500;
-        }
-        
-        .password-input-container {
-            position: relative;
-        }
-        
-        .password-input-container input {
-            padding-right: 40px;
-        }
-    </style>
 </head>
-<body class="bg-gray-100 font-sans">
+<body class="bg-gray-100 font-sans overflow-x-hidden">
     <div class="flex">
         <div class="sidebar w-64 bg-white h-screen shadow-md fixed">
             <div class="p-6 flex flex-col items-center h-full">
                 <div class="flex flex-col items-center w-full">
                     <img src="../../assets/images/logo.svg" alt="BlepNote Logo" class="h-12 mb-6">
                     <div class="flex flex-col items-center mb-8">
-                        <div class="profile-picture-sidebar mb-4">
-                            <img id="profilePicture" src="../../assets/images/default-profile.jpg" alt="Profile">
+                        <div class="w-[150px] h-[150px] rounded-full overflow-hidden mb-4">
+                            <img id="profilePicture" src="../../assets/images/default-profile.jpg" alt="Profile" class="w-full h-full object-cover">
                         </div>
                         <h2 class="text-xl text-center font-bold" id="profileName">&nbsp;</h2>
                         <p class="text-gray-600 text-sm text-center mt-2">Journal enthusiast and cat lover</p>
@@ -227,43 +84,49 @@
                     <div class="mb-8">
                         <h2 class="text-lg font-semibold mb-4">Change Password</h2>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="password-input-container">
-                                <label for="currentPassword" class="block text-sm font-medium text-gray-700 mb-1">Current Password</label>
-                                <input type="password" id="currentPassword" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                                <span class="password-toggle" id="toggleCurrentPassword">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                                        <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-                                        <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
-                                    </svg>
-                                </span>
+                          <div>
+                            <label for="currentPassword" class="block text-sm font-medium text-gray-700 mb-1">Current Password</label>
+                            <div class="relative">
+                              <input type="password" id="currentPassword" class="w-full px-4 pr-10 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                              <button type="button" id="toggleCurrentPassword" class="absolute inset-y-0 right-3 flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                                  <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                                  <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
+                                </svg>
+                              </button>
                             </div>
-                            <div class="password-input-container">
-                                <label for="newPassword" class="block text-sm font-medium text-gray-700 mb-1">New Password</label>
-                                <input type="password" id="newPassword" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                                <span class="password-toggle" id="toggleNewPassword">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                                        <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-                                        <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
-                                    </svg>
-                                </span>
+                          </div>
+                          <div>
+                            <label for="newPassword" class="block text-sm font-medium text-gray-700 mb-1">New Password</label>
+                            <div class="relative">
+                              <input type="password" id="newPassword" class="w-full px-4 pr-10 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                              <button type="button" id="toggleNewPassword" class="absolute inset-y-0 right-3 flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                                  <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                                  <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
+                                </svg>
+                              </button>
                             </div>
-                            <div class="password-input-container">
-                                <label for="confirmPassword" class="block text-sm font-medium text-gray-700 mb-1">Confirm New Password</label>
-                                <input type="password" id="confirmPassword" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                                <span class="password-toggle" id="toggleConfirmPassword">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                                        <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-                                        <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
-                                    </svg>
-                                </span>
+                          </div>
+                          <div>
+                            <label for="confirmPassword" class="block text-sm font-medium text-gray-700 mb-1">Confirm New Password</label>
+                            <div class="relative">
+                              <input type="password" id="confirmPassword" class="w-full px-4 pr-10 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                              <button type="button" id="toggleConfirmPassword" class="absolute inset-y-0 right-3 flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                                  <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                                  <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
+                                </svg>
+                              </button>
                             </div>
-                            <div class="flex items-end">
-                                <button id="savePasswordBtn" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-                                    Save Password
-                                </button>
-                            </div>
+                          </div>
                         </div>
-                    </div>                    
+                      </div>
+                      <div class="mb-8 flex justify-start">
+                        <button id="saveChangesBtn" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                          Save Changes
+                        </button>
+                      </div>                      
                     <div>
                         <h2 class="text-lg font-semibold mb-4 text-red-600">Danger Zone</h2>
                         <div class="border border-red-200 rounded-lg p-4 bg-red-50">
@@ -418,16 +281,6 @@
                 }
             });
 
-            const nameInput = document.getElementById('name');
-            nameInput.addEventListener('blur', function() {
-                if (currentUser) {
-                    currentUser.name = nameInput.value;
-                    localStorage.setItem('currentUser', JSON.stringify(currentUser));
-                    document.getElementById('profileName').textContent = nameInput.value;
-                    showSuccessToast('Name updated successfully!');
-                }
-            });
-
             const changeEmailBtn = document.getElementById('changeEmailBtn');
             const changeEmailModal = document.getElementById('changeEmailModal');
             const closeEmailModal = document.getElementById('closeEmailModal');
@@ -483,32 +336,35 @@
                 });
             }
 
-            const savePasswordBtn = document.getElementById('savePasswordBtn');
-            savePasswordBtn.addEventListener('click', function() {
+            // Save Changes Button functionality
+            document.getElementById('saveChangesBtn').addEventListener('click', function() {
+                const name = document.getElementById('name').value;
                 const currentPassword = document.getElementById('currentPassword').value;
                 const newPassword = document.getElementById('newPassword').value;
                 const confirmPassword = document.getElementById('confirmPassword').value;
                 
-                if (!currentPassword || !newPassword || !confirmPassword) {
-                    alert('Please fill in all password fields');
-                    return;
-                }
-                
-                if (newPassword !== confirmPassword) {
-                    alert('New passwords do not match');
-                    return;
-                }
-                
+                // Update name
                 if (currentUser) {
+                    currentUser.name = name;
+                    document.getElementById('profileName').textContent = name;
+                }
+                
+                // Update password if fields are filled
+                if (currentPassword && newPassword && confirmPassword) {
+                    if (newPassword !== confirmPassword) {
+                        alert('New passwords do not match');
+                        return;
+                    }
                     currentUser.password = newPassword;
-                    localStorage.setItem('currentUser', JSON.stringify(currentUser));
                     
+                    // Clear password fields
                     document.getElementById('currentPassword').value = '';
                     document.getElementById('newPassword').value = '';
                     document.getElementById('confirmPassword').value = '';
-                    
-                    showSuccessToast('Password changed successfully!');
                 }
+                
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                showSuccessToast('Changes saved successfully!');
             });
 
             const deleteAccountBtn = document.getElementById('deleteAccountBtn');
