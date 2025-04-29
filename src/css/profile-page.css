@@ -1,0 +1,134 @@
+.profile-picture-container {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+}
+
+.profile-picture {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.profile-picture:hover {
+    opacity: 0.8;
+}
+
+.profile-picture, 
+.profile-picture-sidebar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.profile-picture img,
+.profile-picture-sidebar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-picture-edit {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: rgba(0,0,0,0.7);
+    color: white;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.profile-picture-container:hover .profile-picture-edit {
+    opacity: 1;
+}
+
+#fileInput {
+    display: none;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    width: 90%;
+    max-width: 500px;
+}
+
+.delete-account-btn {
+    transition: all 0.3s ease;
+}
+
+.delete-account-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+#logoutModal {
+    transition: opacity 0.3s ease;
+}
+
+#deleteAccountModal {
+    transition: opacity 0.3s ease;
+}
+
+#deleteAccountModal .bg-white {
+    transform: translateY(0);
+    transition: transform 0.3s ease;
+}
+
+#deleteAccountModal.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+#deleteAccountModal.hidden .bg-white {
+    transform: translateY(-20px);
+}
+
+.sidebar-link.active {
+    background-color: #EFF6FF;
+    color: #3B82F6;
+    font-weight: 500;
+}
+
+.password-input-container {
+    position: relative;
+}
+
+.password-input-container input {
+    padding-right: 40px;
+}
