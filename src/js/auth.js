@@ -147,8 +147,7 @@ function hideNotification() {
 
 function checkPasswordRequirements() {
     const password = document.getElementById('signupPassword').value;
-    const confirmPassword = document.getElementById('signupPasswordConfirm').value;
-    const submitBtn = document.getElementById('signupSubmitBtn');
+    const confirmPassword = document.getElementById('signupPasswordConfirm')?.value || '';
     
     const hasMinLength = password.length >= 8;
     const hasUppercase = /[A-Z]/.test(password);
@@ -157,15 +156,6 @@ function checkPasswordRequirements() {
     const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
     const passwordsMatch = password === confirmPassword;
 
-    console.log('Password validation:', {
-        length: hasMinLength,
-        uppercase: hasUppercase,
-        lowercase: hasLowercase,
-        number: hasNumber,
-        specialChar: hasSpecialChar,
-        passwordsMatch: passwordsMatch
-    });
-    
     updateRequirement('lengthReq', hasMinLength);
     updateRequirement('uppercaseReq', hasUppercase);
     updateRequirement('lowercaseReq', hasLowercase);
@@ -173,27 +163,27 @@ function checkPasswordRequirements() {
     updateRequirement('specialReq', hasSpecialChar);
     
     const errorElement = document.getElementById('passwordMatchError');
-    if (confirmPassword.length > 0 && !passwordsMatch) {
-        errorElement.style.display = 'block';
-    } else {
-        errorElement.style.display = 'none';
+    if (errorElement) {
+        errorElement.style.display = (confirmPassword.length > 0 && !passwordsMatch) ? 'block' : 'none';
     }
     
-    const allValid = hasMinLength && hasUppercase && hasLowercase && hasNumber && hasSpecialChar && passwordsMatch;
-    
-    submitBtn.disabled = !allValid;
-    submitBtn.classList.toggle('opacity-50', !allValid);
-    submitBtn.classList.toggle('cursor-not-allowed', !allValid);
+    const submitBtn = document.getElementById('signupSubmitBtn');
+    if (submitBtn) {
+        const allValid = hasMinLength && hasUppercase && hasLowercase && hasNumber && hasSpecialChar && passwordsMatch;
+        submitBtn.disabled = !allValid;
+        submitBtn.classList.toggle('opacity-50', !allValid);
+        submitBtn.classList.toggle('cursor-not-allowed', !allValid);
+    }
 }
 
 function updateRequirement(elementId, isValid) {
     const element = document.getElementById(elementId);
     if (!element) return;
     
-    element.classList.toggle('valid', isValid);
-    element.classList.toggle('invalid', !isValid);
+    element.classList.toggle('text-green-500', isValid);
+    element.classList.toggle('text-gray-500', !isValid);
     
-    const icon = element.querySelector('.requirement-icon');
+    const icon = element.querySelector('svg');
     if (icon) {
         icon.classList.toggle('text-green-500', isValid);
         icon.classList.toggle('text-gray-400', !isValid);
