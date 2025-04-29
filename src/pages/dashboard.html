@@ -421,7 +421,7 @@
             
             const moodStyle = moodStyles[entry.mood];
             entryMood.textContent = moodStyle.label;
-            entryMood.className = `inline-block px-3 py-1 rounded-full text-sm font-semibold ${moodStyle.text} ${moodStyle.bg}`;
+            entryMood.className = `inline-block px-2 py-1 rounded-full text-sm font-semibold ${moodStyle.text} ${moodStyle.bg}`;
             
             entryModalContent.className = `entry-modal-content ${moodStyle.bg} rounded-lg p-6`;
             entryModalContent.style.borderLeft = `4px solid ${moodStyle.border.replace('border-', '')}`;
