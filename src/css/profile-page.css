@@ -18,7 +18,7 @@
     opacity: 0.8;
 }
 
-.profile-picture, 
+.profile-picture,
 .profile-picture-sidebar {
     width: 150px;
     height: 150px;
@@ -70,6 +70,13 @@
     z-index: 1000;
     justify-content: center;
     align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal.active {
+    display: flex;
+    opacity: 1;
 }
 
 .modal-content {
@@ -78,6 +85,68 @@
     border-radius: 0.5rem;
     width: 90%;
     max-width: 500px;
+    transform: scale(0.9);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.modal.active .modal-content {
+    transform: scale(1);
+    opacity: 1;
+}
+
+#changeEmailModal,
+#deleteAccountModal,
+#confirmChangesModal,
+#logoutModal {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+#changeEmailModal.show,
+#deleteAccountModal.show,
+#confirmChangesModal.show,
+#logoutModal.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+#changeEmailModal .bg-white,
+#deleteAccountModal .bg-white,
+#confirmChangesModal .bg-white,
+#logoutModal .bg-white {
+    transform: scale(0.95);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+#changeEmailModal.show .bg-white,
+#deleteAccountModal.show .bg-white,
+#confirmChangesModal.show .bg-white,
+#logoutModal.show .bg-white {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.fixed.inset-0.bg-black.bg-opacity-50 {
+    transition: opacity 0.3s ease;
+}
+
+#successToast,
+#errorToast {
+    animation: fadeInUp 0.3s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .delete-account-btn {
@@ -85,7 +154,6 @@
 }
 
 .delete-account-btn:hover {
-    transform: translateY(-2px);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -95,28 +163,6 @@
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
-}
-
-#logoutModal {
-    transition: opacity 0.3s ease;
-}
-
-#deleteAccountModal {
-    transition: opacity 0.3s ease;
-}
-
-#deleteAccountModal .bg-white {
-    transform: translateY(0);
-    transition: transform 0.3s ease;
-}
-
-#deleteAccountModal.hidden {
-    opacity: 0;
-    pointer-events: none;
-}
-
-#deleteAccountModal.hidden .bg-white {
-    transform: translateY(-20px);
 }
 
 .sidebar-link.active {
@@ -131,4 +177,13 @@
 
 .password-input-container input {
     padding-right: 40px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fixed.bottom-4.right-4 {
+    animation: fadeIn 0.3s ease-out;
 }
