@@ -312,14 +312,16 @@
     
             function openModal(modal) {
                 modal.classList.remove('hidden');
+                void modal.offsetWidth;
+                modal.classList.add('show');
             }
-    
+
             function closeModal(modal) {
-                modal.classList.add('hidden');
-                if (modal === changeEmailModal) {
-                    newEmailInput.value = '';
-                    confirmEmailPasswordInput.value = '';
-                }
+                modal.classList.remove('show');
+                modal.addEventListener('transitionend', function handler() {
+                    modal.classList.add('hidden');
+                    modal.removeEventListener('transitionend', handler);
+                });
             }
     
             function clearPasswordFields() {
