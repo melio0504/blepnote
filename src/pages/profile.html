@@ -602,6 +602,12 @@
                 openModal(document.getElementById('logoutModal'));
             });
     
+            document.getElementById('logoutModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeModal(this);
+                }
+            });
+
             document.getElementById('closeLogoutModal').addEventListener('click', function() {
                 closeModal(document.getElementById('logoutModal'));
             });
