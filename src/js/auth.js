@@ -291,12 +291,6 @@ loginForm.addEventListener('submit', (e) => {
 document.getElementById('loginFormElement').addEventListener('submit', function(e) {
     e.preventDefault();
     
-    const email = document.getElementById('loginEmail').value;
-    const password = document.getElementById('loginPassword').value;
-    
-    localStorage.setItem('lastEmail', email);
-    localStorage.setItem('lastPassword', password);
-    
     const users = JSON.parse(localStorage.getItem('users') || '[]');
     const user = users.find(u => u.email === email && u.password === password);
     
