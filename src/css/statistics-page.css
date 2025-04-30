@@ -1,0 +1,51 @@
+.mood-card {
+    transition: all 0.3s ease;
+    transform-style: preserve-3d;
+}
+.mood-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+.mood-count {
+    font-size: 2.5rem;
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+
+.random-entry-container {
+    min-height: 200px;
+    transition: all 0.5s ease;
+}
+
+.cat-paw {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ffffff"><path d="M12 2C8.14 2 5 5.14 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.86-3.14-7-7-7zm-1 4h2v3h-2V6zM9 9h6v2H9V9z"/></svg>');
+    background-size: contain;
+    opacity: 0.7;
+    pointer-events: none;
+    z-index: 10;
+}
+
+#logoutModal {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+#logoutModal.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+#logoutModal .bg-white {
+    transform: scale(0.95);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+#logoutModal.show .bg-white {
+    transform: scale(1);
+    opacity: 1;
+}
