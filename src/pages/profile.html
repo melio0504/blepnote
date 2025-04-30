@@ -549,7 +549,8 @@
             });
     
             confirmDeleteAccount.addEventListener('click', function() {
-                const password = document.getElementById('deleteAccountPassword').value;
+                const passwordInput = document.getElementById('deleteAccountPassword');
+                const password = passwordInput.value;
                 
                 if (!password) {
                     showToast('error', 'Please enter your password to confirm account deletion');
@@ -558,6 +559,8 @@
                 
                 if (password !== currentUser.password) {
                     showToast('error', 'Incorrect password');
+                    passwordInput.value = '';
+                    closeModal(deleteAccountModal);
                     return;
                 }
                 
