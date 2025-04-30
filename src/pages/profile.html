@@ -119,6 +119,7 @@
                                 </svg>
                               </button>
                             </div>
+                            <span id="passwordMatchIndicator" class="text-xs mt-1 pl-2 hidden"></span> 
                           </div>
                         </div>
                       </div>
@@ -452,6 +453,32 @@
             setupPasswordToggle('toggleCurrentPassword', 'currentPassword');
             setupPasswordToggle('toggleNewPassword', 'newPassword');
             setupPasswordToggle('toggleConfirmPassword', 'confirmPassword');
+
+            function checkPasswordMatch() {
+                const newPassword = document.getElementById('newPassword').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                const indicator = document.getElementById('passwordMatchIndicator');
+                
+                if (!newPassword || !confirmPassword) {
+                    indicator.classList.add('hidden');
+                    return;
+                }
+                
+                if (newPassword === confirmPassword) {
+                    indicator.textContent = 'Password match!';
+                    indicator.classList.remove('hidden');
+                    indicator.classList.remove('text-red-500');
+                    indicator.classList.add('text-green-500');
+                } else {
+                    indicator.textContent = 'Password do not match';
+                    indicator.classList.remove('hidden');
+                    indicator.classList.remove('text-green-500');
+                    indicator.classList.add('text-red-500');
+                }
+            }
+
+            document.getElementById('newPassword').addEventListener('input', checkPasswordMatch);
+            document.getElementById('confirmPassword').addEventListener('input', checkPasswordMatch);
     
             document.getElementById('saveChangesBtn').addEventListener('click', function() {
                 const name = document.getElementById('name').value;
