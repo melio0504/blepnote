@@ -140,6 +140,7 @@
 #successToast,
 #errorToast {
     animation: fadeInUp 0.3s ease-out;
+    z-index: 70;
 }
 
 @keyframes fadeInUp {
