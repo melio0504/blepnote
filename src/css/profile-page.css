@@ -59,6 +59,10 @@
     display: none;
 }
 
+#passwordMatchIndicator {
+    transition: all 0.2s ease;
+}
+
 .modal {
     display: none;
     position: fixed;
