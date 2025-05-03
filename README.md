@@ -6,7 +6,6 @@
 
 With a simple and engaging interface, BlepNote makes mood tracking effortless. Your entries influence a dynamic cat meme GIF that reflects your current mood, while a visual tracker maps your emotional journey throughout the year. Every mood is color-coded, making it easy to recognize emotional patterns and progress.
 
----
 
 ## Features
 
@@ -40,27 +39,19 @@ With a simple and engaging interface, BlepNote makes mood tracking effortless. Y
 
 ![Mood Report](/assets/images/screenshot-7.png)
 
----
-
 ## Tech Stack
 
 - **HTML**
 - **Tailwind CSS**
 - **JavaScript**
 
----
-
 ## Project Status
 
 This is a personal project aimed at promoting mental wellness through journaling and mood tracking. Future enhancements may include proper backend, authentication, data export, or mobile support.
 
----
-
 ## License
 
 This project is licensed under the MIT License.
-
----
 
 ## Acknowledgments
 
