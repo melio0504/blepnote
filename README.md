@@ -65,3 +65,8 @@ This project is licensed under the MIT License.
 ## Acknowledgments
 
 Thanks to the many cat memes that inspired BlepNote’s personality, and to GitHub for the visual inspiration behind the mood tracker. Most of all, heartfelt thanks to the love of my life, Erin — without her support, encouragement, and love, this project wouldn't have been possible.
+
+## Credits
+
+- **[oneko.js](https://github.com/adryd325/oneko.js)**  
+  The animated cat companion featured on the site is powered by this charming open-source library created by [@adryd325](https://github.com/adryd325). Licensed under the MIT License.
