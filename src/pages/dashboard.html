@@ -38,12 +38,20 @@
             </div>
         </div>
         <div class="flex-1 ml-64">
-            <div class="container mx-auto px-4 py-8 flex justify-center items-center">
-                <div class="bg-gray-200 rounded-lg flex items-center justify-center h-50 w-60" id="catGifContainer">
-                    <div id="emptyGifState" class="text-gray-500 text-center p-4">
-                        No journal entry yet.<br>Add one today!
+            <div class="container mx-auto px-4 py-8">
+                <div class="flex flex-col md:flex-row gap-6 items-center justify-center"> <!-- Flex container -->
+                    <!-- Cat GIF Container -->
+                    <div class="bg-gray-200 rounded-lg flex items-center justify-center h-50 w-60" id="catGifContainer">
+                        <div id="emptyGifState" class="text-gray-500 text-center p-4">
+                            No journal entry yet.<br>Add one today!
+                        </div>
+                        <img id="moodGif" class="h-full w-full object-cover rounded-lg hidden">
                     </div>
-                    <img id="moodGif" class="h-full w-full object-cover rounded-lg hidden">
+                    
+                    <!-- Spotify Player -->
+                    <div class="flex-1 max-w-2xl">
+                        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/3AJwUDP919kvQ9QcozQPxg?utm_source=generator" width="50%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                    </div>
                 </div>
             </div>
             <div class="container mx-auto px-4 py-0">
