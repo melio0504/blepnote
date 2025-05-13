@@ -38,19 +38,29 @@
             </div>
         </div>
         <div class="flex-1 ml-64">
-            <div class="container mx-auto px-4 py-8">
-                <div class="flex flex-col md:flex-row gap-6 items-center justify-center"> <!-- Flex container -->
-                    <!-- Cat GIF Container -->
-                    <div class="bg-gray-200 rounded-lg flex items-center justify-center h-50 w-60" id="catGifContainer">
+            <div class="container mx-auto px-4 py-6">
+                <div class="flex justify-end gap-40 items-center">
+                    <div class="bg-gray-200 rounded-lg h-64 w-64" id="catGifContainer">
                         <div id="emptyGifState" class="text-gray-500 text-center p-4">
                             No journal entry yet.<br>Add one today!
                         </div>
                         <img id="moodGif" class="h-full w-full object-cover rounded-lg hidden">
                     </div>
                     
-                    <!-- Spotify Player -->
-                    <div class="flex-1 max-w-2xl">
-                        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/3AJwUDP919kvQ9QcozQPxg?utm_source=generator" width="50%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                    <div class=" right-4 top-4 flex gap-6">
+                        <div class="bg-white p-4 rounded-lg shadow-md w-half">
+                            <h3 class="text-lg font-semibold text-blue-700 mb-4">Song of the Day</h3>
+                            <div class="mt-2">
+                                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/2KWhl75cqqKWEqTIHv1Zsd?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                            </div>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg shadow-md w-60">
+                            <h3 class="text-lg font-semibold text-blue-700 mb-6">Quote of the Day</h3>
+                            <blockquote class="text-gray-700 italic text-s mb-2">
+                                "The only way to do great work is to love what you do."
+                            </blockquote>
+                            <p class="text-gray-500 text-right text-sm">— Steve Jobs</p>
+                        </div>
                     </div>
                 </div>
             </div>
