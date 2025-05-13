@@ -254,6 +254,7 @@ signupForm.addEventListener('submit', (e) => {
     showNotification('success', 'Account Created', 'Please log in with your new account');
     switchToLogin();
     document.getElementById('loginEmail').value = email;
+    document.getElementById('loginPassword').focus();
     document.getElementById('signupName').value = '';
     document.getElementById('signupPassword').value = '';
 });
