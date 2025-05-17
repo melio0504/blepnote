@@ -217,7 +217,7 @@
 
 #catGifContainer {
     height: 234px;
-    width: 240px;
+    min-width: 240px;
     position: relative;
 }
 
