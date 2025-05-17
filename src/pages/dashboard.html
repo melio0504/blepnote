@@ -435,6 +435,10 @@
             return lastUpdatedDate !== today;
         }
 
+        function getRandomItem(array) {
+            return array[Math.floor(Math.random() * array.length)];
+        }
+
         function setSongOfTheDay() {
             if (shouldUpdateAtMidnight("lastUpdatedSongDate")) {
                 const song = getRandomItem(songs);
