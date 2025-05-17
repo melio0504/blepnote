@@ -403,15 +403,15 @@
 
         const songs = [
             { id: "5jgFfDIR6FR0gvlA56Nakr", name: "Blackbird - The Beatles" },
-            { id: "5jgFfDIR6FR0gvlA56Nakr", name: "" },
-            { id: "5jgFfDIR6FR0gvlA56Nakr", name: "" },
-            { id: "5jgFfDIR6FR0gvlA56Nakr", name: "" },
-            { id: "5jgFfDIR6FR0gvlA56Nakr", name: "" },
-            { id: "5jgFfDIR6FR0gvlA56Nakr", name: "" },
-            { id: "5jgFfDIR6FR0gvlA56Nakr", name: "" },
-            { id: "5jgFfDIR6FR0gvlA56Nakr", name: "" },
-            { id: "5jgFfDIR6FR0gvlA56Nakr", name: "" },
-            { id: "5jgFfDIR6FR0gvlA56Nakr", name: "" },
+            { id: "5QUeSXjTMHbq1fW5da2waF", name: "Place To Be - Nick Drake" },
+            { id: "3NmiHiYfWmaVkNByF705Ni", name: "You Can Close Your Eyes - James Taylor" },
+            { id: "1qhp5owrFGeZ5Jgin28nwR", name: "You've Got a Friend - Carole King" },
+            { id: "3fVFJSXz0luBbj2HTAbtsd", name: "Take Me Down Easy - James Henry Jr." },
+            { id: "3UKy1X3nGe5diFqN5swaFz", name: "Hiding Tonight - Alex Turner" },
+            { id: "6l8EbYRtQMgKOyc1gcDHF9", name: "Bridge Over Troubled Water - Simon & Garfunkel" },
+            { id: "6PypGyiu0Y2lCDBN1XZEnP", name: "Everybody Hurts - R.E.M." },
+            { id: "6HSXNV0b4M4cLJ7ljgVVeh", name: "Knockin' Heaven Door - Bob Dylan" },
+            { id: "7iN1s7xHE4ifF5povM6A48", name: "Let It Be - The Beatles" },
         ];
 
         const quotes = [
@@ -540,7 +540,6 @@
             const notificationTitle = document.getElementById('notificationTitle');
             const notificationMessage = document.getElementById('notificationMessage');
             
-            // Set colors based on type
             let borderColor = 'border-blue-500';
             let iconColor = 'text-blue-500';
             
@@ -555,19 +554,15 @@
                 iconColor = 'text-yellow-500';
             }
             
-            // Apply styles
             notification.className = `fixed bottom-4 right-4 z-50 ${borderColor}`;
             icon.className = `h-6 w-6 ${iconColor}`;
             
-            // Set content
             notificationTitle.textContent = title;
             notificationMessage.textContent = message;
             
-            // Show notification
             notification.classList.remove('hidden');
             notification.classList.add('notification-show');
             
-            // Auto-hide after 5 seconds
             setTimeout(() => {
                 hideNotification();
             }, 5000);
@@ -584,7 +579,6 @@
             }, 300);
         }
 
-        // Add event listener for close button
         document.getElementById('closeNotification').addEventListener('click', hideNotification);
     
         function viewJournalEntry(dateKey) {
