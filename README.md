@@ -1,7 +1,6 @@
 # BlepNote
 
 ![Screenshot - Homepage](/assets/images/screenshot-1.png)
-![Screenshot - About](/assets/images/about.png)
 
 **BlepNote** is a mental health tracker designed to help you monitor your daily mood and reflect on your thoughts — all with the support of a friendly cat companion. Whether you're feeling joyful, stressed, or anything in between, BlepNote provides a safe space to express yourself and track your emotional well-being over time.
 
