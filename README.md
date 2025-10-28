@@ -9,31 +9,31 @@ With a simple and engaging interface, BlepNote makes mood tracking effortless. Y
 
 ## Features
 
-### 🗓️ Daily Mood Tracking
+### Daily Mood Tracking
 - Choose how you're feeling each day.
 - Color-coded mood system for easy tracking.
 - Inspired by GitHub-style contribution graphs.
 
-### 📔 Personal Journal
+### Personal Journal
 - Write down your thoughts and feelings daily.
 - Each entry is tied to the selected mood for that day.
 
 ![Add Journal Entry](/assets/images/screenshot-3.png)
 
-### ✏️ Entry Management
+### Entry Management
 - View your previous entries.
 - Edit entries in case you need to fix something.
 
 ![View Journal Entry](/assets/images/screenshot-4.png)
 ![Edit Journal Entry](/assets/images/screenshot-5.png)
 
-### 🙋‍♂️ Profile Management
+### Profile Management
 - Edit your profile details: name, email, and password.
 - Bio is fixed — no changes allowed for now!
 
 ![Edit Profile](/assets/images/screenshot-6.png)
 
-### 📊 Mood Reports
+### Mood Reports
 - Track your mood progress with visual summaries.
 - See how you’ve been doing over time.
 
